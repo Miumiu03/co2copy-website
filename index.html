@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>碳和算力 - AI 算力云服务平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin: 30px 0;
+            padding: 40px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 40px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .pricing-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pricing-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .pricing-features {
+            margin-bottom: 25px;
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            color: #7f8c8d;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .price-unit {
+            font-size: 1rem;
+            color: #95a5a6;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .feature-content h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .feature-content p {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .model-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .model-content {
+            flex: 1;
+        }
+
+        .model-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .model-description {
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .model-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .model-link:hover {
+            text-decoration: underline;
+        }
+
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .scenario-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .scenario-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .scenario-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .scenario-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .contact-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .contact-content {
+            flex: 1;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            color: #7f8c8d;
+            margin-bottom: 15px;
+        }
+
+        .contact-phone {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .contact-time {
+            color: #95a5a6;
+        }
+
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .contact-qr {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #7f8c8d;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .model-section,
+            .contact-section {
+                flex-direction: column;
+                gap: 30px;
+            }
+
+            .pricing-grid,
+            .features-grid,
+            .scenarios-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 联系我们区域 -->
+        <div class="card">
+            <h2 class="section-title">联系我们</h2>
+            <div class="contact-section">
+                <div class="contact-content">
+                    <div class="contact-info">
+                        <p><strong>地址：</strong></p>
+                        <p>新疆维吾尔自治区克拉玛依市克拉玛依区天海路 333号</p>
+                        <p>上海市徐汇区龙文路199号国际传媒港18层1803室</p>
+                    </div>
+                    <div class="contact-info">
+                        <p><strong>电话/微信：</strong></p>
+                        <p class="contact-phone">15026675801</p>
+                    </div>
+                    <div class="contact-info">
+                        <p class="contact-time">周一至周五：8:00-20:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 英雄区域 -->
+        <div class="card hero-section">
+            <h1 class="hero-title">
+                超万卡 4090
+                <span class="gradient-text">AI 算力云</span>
+            </h1>
+            <p class="hero-subtitle">算力-模型-应用的企业级服务</p>
+            <p class="hero-subtitle">专业机房全天候稳定运行</p>
+            <a href="https://co2-cloud.tanheidc.cn/login" class="cta-button">立即体验</a>
+        </div>
+
+        <!-- 高性能GPU区域 -->
+        <div class="card">
+            <h2 class="section-title">高性能 4090 GPU 即时体验</h2>
+            <p class="section-subtitle">
+                超万卡规模 4090，为 AI 计算需求提供强大支持，按需付费，启停随心，可灵活根据用户业务流量波动实现资源扩缩容，保障算力高效利用，满足全场景需求。
+            </p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3 class="pricing-title">按单卡购买</h3>
+                    <div class="pricing-features">
+                        <div class="feature-item">
+                                <span>GPU：</span>
+                            <span>RTX 4090</span>
+                            </div>
+                        <div class="feature-item">
+                                <span>资源：</span>
+                            <span>CPU 12 核 ｜ 内存 48 GB</span>
+                        </div>
+                        <div class="feature-item">
+                            <span>系统盘：</span>
+                            <span>30 GB SSD</span>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="price">2.18</span>
+                        <span class="price-unit">/小时</span>
+                    </div>
+                    <a href="https://co2-cloud.tanheidc.cn/login" class="cta-button">立即体验</a>
+                </div>
+
+                <div class="pricing-card">
+                    <h3 class="pricing-title">按 8 卡（整台服务器）购买</h3>
+                    <div class="pricing-features">
+                        <div class="feature-item">
+                                <span>GPU：</span>
+                            <span>显存 24 GB *8</span>
+                            </div>
+                        <div class="feature-item">
+                                <span>资源：</span>
+                            <span>CPU 96 核 ｜ 内存 384 GB</span>
+                        </div>
+                        <div class="feature-item">
+                            <span>系统盘：</span>
+                            <span>4*2T SSD</span>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <span class="price">17.44</span>
+                        <span class="price-unit">/小时</span>
+                    </div>
+                    <a href="https://co2-cloud.tanheidc.cn/login" class="cta-button">立即体验</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- 稳定高效服务区域 -->
+        <div class="card">
+            <h2 class="section-title">稳定、高效的算力云服务</h2>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">1</div>
+                    <div class="feature-content">
+                        <h3>自由选配，容器秒级启动</h3>
+                        <p>预装镜像，实例秒级启动，无需等待，即刻开始属于你的任务。</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">2</div>
+                    <div class="feature-content">
+                        <h3>内置多种实例访问方式</h3>
+                        <p>提供 VScode、Jupyter 和 SSH 等多种访问方式，让你按需选择最合适的操作界面。</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">3</div>
+                    <div class="feature-content">
+                        <h3>UI 化开放端口，支持外网访问</h3>
+                        <p>用户友好的 UI 界面，实现轻松管理开放端口，并支持外网直接访问已构建好的服务，方便远程操作和测试体验。</p>
+                    </div>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">4</div>
+                    <div class="feature-content">
+                        <h3>文件存储，自动挂载</h3>
+                        <p>免费提供 20G 文件存储，灵活按需扩缩容，同时支持预传数据自动挂载至实例中，大幅减少传输耗时，显著提升工作效率。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://co2-cloud.tanheidc.cn/login" class="cta-button">立即体验</a>
+            </div>
+        </div>
+
+        <!-- 大模型服务区域 -->
+        <div class="card">
+            <h2 class="section-title">持续更新的大模型服务</h2>
+            
+            <div class="model-section">
+                <div class="model-content">
+                    <h3 class="model-title">模型广场持续更新</h3>
+                    <p class="model-description">
+                        汇聚全球主流 Al 大模型，实时同步开源社区更新，支持线上平台即点即用，并提供标准 API 调用、零代码一键部署等多种使用方式。
+                    </p>
+                    <a href="https://co2-cloud.tanheidc.cn/login" class="model-link">立即体验 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 推理服务区域 -->
+        <div class="card">
+            <div class="model-section">
+                <div class="model-content">
+                    <h3 class="model-title">极致的推理服务</h3>
+                    <p class="model-description">
+                        集成 vLLM，SGlang 等高性能推理框架提升推理效率，即使面对千亿參数模型级别，也能低延迟稳定处理海量并发请求。
+                    </p>
+                    <a href="https://co2-cloud.tanheidc.cn/login" class="model-link">立即体验 →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 应用场景区域 -->
+        <div class="card">
+            <h2 class="section-title">应用场景</h2>
+            
+            <div class="scenarios-grid">
+                <div class="scenario-card">
+                    <div class="scenario-icon">1</div>
+                    <h3 class="scenario-title">云端游戏</h3>
+                    <p class="scenario-description">满足多终端、高并发的游戏智能管理需求，支持超高清画面渲染处理和实时互动，提升云端游戏体验。</p>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-icon">2</div>
+                    <h3 class="scenario-title">AI 绘画和内容创作</h3>
+                    <p class="scenario-description">快速解析文本，通过强大的 Al 算法，给出不同风格和细节变化的图像，大大提高创作效率和创意实现的可能性。</p>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-icon">3</div>
+                    <h3 class="scenario-title">深度学习和推理</h3>
+                    <p class="scenario-description">支持多种深度学习框架，具备强大的计算能力和高速显存，非常适合需要快速推理的应用程序。</p>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-icon">4</div>
+                    <h3 class="scenario-title">3D 建模渲染和视频制作</h3>
+                    <p class="scenario-description">加速 3D 渲染和动画制作流程，提升实时 3D环境中的协作效率，同时缩短视频编辑和后期制作的时间。</p>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-icon">5</div>
+                    <h3 class="scenario-title">专业图形和可视化</h3>
+                    <p class="scenario-description">对需要进行复杂图形处理和数据可视化的专业应用提供支持，可以处理大规模的 3D模型和数据集。</p>
+                </div>
+
+                <div class="scenario-card">
+                    <div class="scenario-icon">6</div>
+                    <h3 class="scenario-title">科学计算和工程模拟</h3>
+                    <p class="scenario-description">适用于需要高性能计算的科学和工程领域，如流体动力学模拟、分子动力学计算等。</p>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="https://co2-cloud.tanheidc.cn/login" class="cta-button">立即体验</a>
+            </div>
+        </div>
+
+        <!-- 最终CTA区域 -->
+        <div class="card">
+            <h2 class="section-title">上碳和，享万卡4090 AI 算力云服务</h2>
+            <div style="text-align: center;">
+                <a href="https://co2-cloud.tanheidc.cn/login" class="cta-button">立即体验</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 碳和算力 - AI 算力云服务平台. 保留所有权利.</p>
+        </div>
+    </footer>
+</body>
+</html>
